@@ -3,8 +3,8 @@ const router = express.Router();
 const signUp = require('../controllers/signUp');
 
 // Test route
-router.get(
-    '/test',
+router.post(
+    '/sign-up',
     signUp.signUp
 );
 

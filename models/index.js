@@ -29,6 +29,14 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
+db.users = require('./users.js')(sequelize, DataTypes);
+
+// We don't want to loose the data when server start.
+db.sequelize.sync({ force : false })
+    .then(() => {
+        console.log("re-sync done")
+    }); 
+
 module.exports = db;
 
 
