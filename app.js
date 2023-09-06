@@ -16,7 +16,7 @@ app.use(function (req, res, next) {
 
 // Error Handling
 app.use(function (err, req, res, next) {
-    res.status(err.status || 500).json({message: 'something went wrong'});
+    res.status(err.status || 500).json({message: err.msg || 'something went wrong'});
 });
 
 // Server 
