@@ -1,22 +1,20 @@
 const db = require('../models/index');
 
 module.exports = {
-    userData : async (req, res, next) => {
+    allItem : async (req, res, next) => {
         try {
             // Fetch Data.
-            let userData = await db.users.findAll({
-                attributes: {
-                    exclude: ['password']
-                },
+            let itemData = await db.items.findAll({
+                offset : parseInt(req.query.offset) || 0,
+                limit : parseInt(req.query.limit) || 5,
                 raw : true
             });
 
-            if(userData && userData.length > 0){
-                // User Already Exit
-                res.status(200).json({data : userData});
+            if(itemData && itemData.length > 0){
+                res.status(200).json({data : itemData});
                 return;
             } else {
-                res.status(403).json({msg : 'UserData not found.'});
+                res.status(403).json({msg : 'No itemData found.'});
                 return;
             }
         } catch (error) {

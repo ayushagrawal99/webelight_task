@@ -4,6 +4,7 @@ const signUp = require('../controllers/signUp');
 const logIn = require('../controllers/login');
 const userData = require('../controllers/userData');
 const items = require('../controllers/items');
+const allItems = require('../controllers/allItems');
 const { signupSchema, logInSchema, itemSchema } = require('../requests/validationSchema');
 const validationMiddleware = require('../middlewares/validationMiddleware');
 const tokenVerification = require('../middlewares/tokenVerification.js');
@@ -36,6 +37,13 @@ router.post(
     validationMiddleware(itemSchema),
     isAdminValidation(),
     items.itemCreate
+);
+
+// All users route
+router.get(
+    '/all-items',
+    isAdminValidation(),
+    allItems.allItem
 );
 
 module.exports = router;
