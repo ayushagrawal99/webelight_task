@@ -30,6 +30,7 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.users = require('./users.js')(sequelize, DataTypes);
+db.items = require('./items')(sequelize, DataTypes);
 
 // We don't want to loose the data when server start.
 db.sequelize.sync({ force : false })

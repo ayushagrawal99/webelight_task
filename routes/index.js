@@ -3,7 +3,8 @@ const router = express.Router();
 const signUp = require('../controllers/signUp');
 const logIn = require('../controllers/login');
 const userData = require('../controllers/userData');
-const { signupSchema, logInSchema } = require('../requests/validationSchema');
+const items = require('../controllers/items');
+const { signupSchema, logInSchema, itemSchema } = require('../requests/validationSchema');
 const validationMiddleware = require('../middlewares/validationMiddleware');
 const tokenVerification = require('../middlewares/tokenVerification.js');
 const isAdminValidation = require('../middlewares/isAdminValidation');
@@ -29,5 +30,12 @@ router.get(
     userData.userData
 );
 
+// All users route
+router.post(
+    '/create-item',
+    validationMiddleware(itemSchema),
+    isAdminValidation(),
+    items.itemCreate
+);
 
 module.exports = router;

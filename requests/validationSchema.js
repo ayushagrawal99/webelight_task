@@ -39,5 +39,19 @@ const schemas = {
             .max(10)
             .required(),
     }),
+    itemSchema: Joi.object().keys({
+        name : Joi.string()
+            .regex(new RegExp(/^[a-zA-Z0-9\d\&\-_\s\)\(]+$/i))
+            .messages({ "string.pattern.base": "name has invalid characters" })
+            .required(),
+        category : Joi.string()
+            .regex(new RegExp(/^[a-zA-Z0-9\d\-_\(\)\s\)\(]+$/i))
+            .messages({ "string.pattern.base": "category has invalid characters" })
+            .required(),
+        price : Joi.number()
+            .messages({ "string.pattern.base": "price has invalid characters" })
+            .min(0)
+            .required(),
+    }),
 };
 module.exports = schemas;
